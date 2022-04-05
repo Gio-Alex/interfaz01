@@ -1,0 +1,115 @@
+<html>
+    ><head>>
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        
+        <script src="https://code.jquery.com/jquery-3.0.0.js"crossorigin="anonymous"></script>
+        <!-- jQuery and JS bundle w/ Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row mb-3 mt-3">
+                <div class="col-4">
+                    <button type="button" class="btn btn-primary" onclick="IrFormularioCrear()">Crear Pedido</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                  <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Documento Identidad</th>
+                          <th scope="col">Nombres</th>                          
+                          <th scope="col">Telefono</th>
+                          <th scope="col">Correo</th>
+                          <th scope="col">Ciudad</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                </div>
+            </div>         
+
+            <div class="container">
+
+            </div>
+            <script src="autores.js">
+    
+            </script>
+
+            
+        </div>   
+        <div>                 
+            <button type="button" class="btn btn-warning" onclick="IrFormularioInicio()">Volver</button>  
+        </div>       
+
+    </body>
+    <script>
+       var editar = false;
+
+        window.onload = function() {
+        var id = $.urlParam('id');
+        if(id != null){
+            editar = true;
+            Obtener(id);
+        }
+        };
+
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results==null) {
+            return null;
+            }
+            return decodeURI(results[1]) || 0;
+        }     
+
+        function Obtener(id){
+            $(".table tbody").html("");
+
+            $.get("http://localhost:65070/api/Cliente/" + id)
+            .done(function( response ) {
+                
+                $.each( response, function( id, fila ) {
+                    $("<tr>").append(
+                        $("<td>").text(fila.IdCliente),
+                        $("<td>").text(fila.DocumentoIdentidad),
+                        $("<td>").text(fila.Nombres),                        
+                        $("<td>").text(fila.Telefono),
+                        $("<td>").text(fila.Correo),
+                        $("<td>").text(fila.Ciudad)
+                    ).appendTo(".table");
+                });
+            });
+        }
+
+        function IrFormularioInicio(){
+            window.location = "Inicio.html";
+        }
+
+        function ObtenerLibro(){
+            $(".table2 tbody").html("");
+
+            var Id = document.getElementById("txtcriterio").value;
+
+            console.log(Id);
+
+            $.get("https://www.etnassoft.com/api/v1/get/?id=" + Id)            
+            .done(function( response ) {
+                console.log(response);
+                $.each( response, function( Id, fila ) {
+                    $("<tr>").append(
+                        $("<td>").text(fila.Id),
+                        $("<td>").text(fila.title),
+                        $("<td>").text(fila.author)
+                    ).appendTo(".table2");
+                });
+            });
+        }
+
+        
+    </script>
+</html>
