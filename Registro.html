@@ -68,7 +68,7 @@
 
         function PintarUsuario(idCliente){
 
-            $.get("http://localhost:65070/api/Cliente/" + idCliente)            
+            $.get("http://localhost:65070/api/Cliente/" + idCliente)
             .done(function( response ) {
                 console.log(response);
                 $("#txtdocumento").val(response.DocumentoIdentidad),
