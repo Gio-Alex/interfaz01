@@ -56,14 +56,15 @@
                     $("<tr>").append(
                         $("<td>").text(fila.IdCliente),
                         $("<td>").text(fila.DocumentoIdentidad),
-                        $("<td>").text(fila.Nombres),                        
+                        $("<td>").text(fila.Nombres),    
+                        $("<td>").text(fila.Apellido),                      
                         $("<td>").text(fila.Telefono),
                         $("<td>").text(fila.Correo),
                         $("<td>").text(fila.Ciudad),
                         $("<td>").append(
                             $("<button>").data("id",fila.IdCliente).addClass("btn btn-success btn-sm mr-1 editar").text("Editar").attr({"type":"button"}),
                             $("<button>").data("id",fila.IdCliente).addClass("btn btn-danger btn-sm eliminar").text("Eliminar").attr({"type":"button"}),
-                            $("<button>").data("id",fila.IdCliente).addClass("btn btn-success btn-sm pedido").text("Pedido").attr({"type":"button"})
+                            $("<button>").data("id",fila.IdCliente).addClass("btn btn-success btn-sm pedido").text("Reserva").attr({"type":"button"})
                         )
                     ).appendTo(".table");
                 });
